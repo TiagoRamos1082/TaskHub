@@ -5,9 +5,11 @@ namespace App\Domain;
 use App\Domain\Enums\Status;
 use App\Domain\Enums\Priority;
 use DateTime;
+use Exception;
 
 class Task
 {
+    private ?int $id;
     private string $name;
     private ?string $description;
     private Status $status;
@@ -21,6 +23,7 @@ class Task
         ?string $description,
         string $created_at
     ) {
+        $this->id = null;
         $this->name = $name;
         $this->description = $description;
         $this->status = Status::PENDING;
@@ -28,6 +31,21 @@ class Task
         $this->created_at = new DateTime($created_at);
         $this->completed_at = null;
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        if($this->id !== null) {
+            throw new Exception("ID already defined.");
+        }
+
+        $this->id = $id;
+    }
+
 
     public function getName(): string
     {
@@ -44,9 +62,18 @@ class Task
         return $this->status;
     }
 
+    public function getStatusToString(): string
+    {
+        return $this->status->value;
+    }
+
     public function getPriority(): Priority
     {
         return $this->priority;
+    }
+
+    public function getPriorityToString(){
+        return $this->priority->value;
     }
 
     public function getCreatedAt(): DateTime

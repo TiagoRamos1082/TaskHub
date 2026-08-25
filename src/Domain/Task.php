@@ -72,7 +72,8 @@ class Task
         return $this->priority;
     }
 
-    public function getPriorityToString(){
+    public function getPriorityToString(): string
+    {
         return $this->priority->value;
     }
 

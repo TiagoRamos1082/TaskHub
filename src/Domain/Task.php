@@ -52,6 +52,11 @@ class Task
         return $this->name;
     }
 
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
     public function getDescription(): ?string
     {
         return  $this->description;
@@ -82,9 +87,19 @@ class Task
         return $this->created_at;
     }
 
+    public function getCreatedAtToString(): string
+    {
+        return $this->created_at->format("Y-m-d H:i:s");
+    }
+
     public function getCompletedAt(): ?DateTime
     {
         return $this->completed_at;
+    }
+
+    public function getCompletedAtToString(): ?string
+    {
+        return $this->completed_at?->format('Y-m-d H:i:s');
     }
 
 }

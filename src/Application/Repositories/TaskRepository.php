@@ -10,6 +10,8 @@ interface TaskRepository
 
     public function deleteById(int $id): void;
 
+    public function update(Task $task): void;
+
 }
 
 ?>

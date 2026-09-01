@@ -65,6 +65,45 @@ class TaskRepositoryTest extends TestCase
 
         $this->assertSame(false, $resultId);
     }
+
+    public function testMustUpdateATask(): void
+    {
+        $connection = Connection::create();
+
+        $repository = new TaskRepository($connection);
+
+        $task = new Task('Arrumar Quarto', "Quarto do Vitor", "2026-08-23 15:43:55");
+
+        $repository->save($task);
+
+        $task->setName('Arrumar Cama');
+
+        $repository->put($task);
+
+        $sql = '
+            select id from tasks where id = :id;
+        ';
+
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([
+            'id'=>$task->getId()
+        ]);
+
+        $resultId = $stmt->fetchColumn();
+
+        $this->assertSame($resultId, $task->getId());
+        $this->assertSame('Arrumar Cama', $task->getName());
+
+        $sql = '
+            DELETE FROM tasks WHERE id = :id;
+        ';
+
+        $stmt = $connection->prepare($sql);
+
+        $stmt->execute([
+            'id'=>$task->getId()
+        ]);
+    }
 }
 
 

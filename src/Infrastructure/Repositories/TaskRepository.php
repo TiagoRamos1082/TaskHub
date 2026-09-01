@@ -44,6 +44,15 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function deleteById(int $id): void
     {
+        $sql = '
+            DELETE FROM tasks where ID = :id;
+        ';
+
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->execute([
+            'id'=> $id
+        ]);
 
     }
 

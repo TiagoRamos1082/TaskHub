@@ -56,6 +56,35 @@ class TaskRepository implements TaskRepositoryInterface
 
     }
 
+    public function put(Task $task): void
+    {
+        $sql='
+            UPDATE tasks
+            SET
+                name = :name,
+                description = :desc,
+                status = :status,
+                priority = :priority,
+                created_at = :created,
+                completed_at = :completed
+            WHERE
+                id = :id
+        ';
+
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->execute([
+            'id'=>$task->getId(),
+            'name'=>$task->getName(),
+            'desc'=>$task->getDescription(),
+            'status'=>$task->getStatusToString(),
+            'priority'=>$task->getPriorityToString(),
+            'created'=>$task->getCreatedAtToString(),
+            'completed'=>$task->getCompletedAtToString()
+        ]);
+
+
+    }
 
 }
 

@@ -86,6 +86,22 @@ class TaskRepository implements TaskRepositoryInterface
 
     }
 
+    public function getById(int $id): ?array
+    {
+        $sql = '
+            SELECT * FROM tasks WHERE id = :id;
+        ';
+
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->execute([
+            'id'=>$id
+        ]);
+
+        $result = $stmt->fetch();
+
+        return $result;
+    }
 }
 
 ?>

@@ -32,6 +32,32 @@ class Task
         $this->completed_at = null;
     }
 
+    public static function rebuild (
+        int $id,
+        string $name,
+        ?string $description,
+        string $status,
+        int $priority,
+        string $created_at,
+        ?string $completed_at
+    ): self
+    {
+        $task = new self(
+            $name,
+            $description,
+            $created_at
+        );
+
+        $task -> setId($id);
+        $task -> setStatus($status);
+        $task -> setPriority($priority);
+        $task -> setCreatedAt($created_at);
+        $task -> setCompletedAt($completed_at);
+
+        return $task;
+    }
+
+
     public function getId(): int
     {
         return $this->id;
@@ -67,9 +93,19 @@ class Task
         return $this->status;
     }
 
+    private function setStatus(string $status): void
+    {
+        $this->status = Status::from($status);
+    }
+
     public function getStatusToString(): string
     {
         return $this->status->value;
+    }
+
+    private function setPriority(string $priority): void
+    {
+        $this->priority = Priority::from($priority);
     }
 
     public function getPriority(): Priority
@@ -82,6 +118,11 @@ class Task
         return $this->priority->value;
     }
 
+    private function setCreatedAt(string $created_at): void
+    {
+        $this->created_at = new DateTime($created_at);
+    }
+
     public function getCreatedAt(): DateTime
     {
         return $this->created_at;
@@ -90,6 +131,18 @@ class Task
     public function getCreatedAtToString(): string
     {
         return $this->created_at->format("Y-m-d H:i:s");
+    }
+
+
+    private function setCompletedAt(?string $completed_at): void
+    {
+        if($completed_at === null) {
+            $this->completed_at = null;
+
+            return;
+        }
+
+        $this->completed_at = new DateTime($completed_at);
     }
 
     public function getCompletedAt(): ?DateTime

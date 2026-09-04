@@ -104,6 +104,45 @@ class TaskRepositoryTest extends TestCase
             'id'=>$task->getId()
         ]);
     }
+
+    public function testMustGetTaskById(): void
+    {
+        $connection = Connection::create();
+
+        $repository = new TaskRepository($connection);
+
+        $sql = 'INSERT INTO tasks ( name, description, status, priority, created_at, completed_at)
+                VALUES (:name, :description, :status, :priority, :created_at, :completed_at)';
+
+        $stmt = $connection->prepare($sql);
+
+        $stmt->execute([
+            ':name'         => 'Arrumar Quarto',
+            ':description'  => 'Quarto do Vitor',
+            ':status'       => 'PENDING',
+            ':priority'     => 1,
+            ':created_at'   => '2026-08-23 15:08:55',
+            ':completed_at' => '2026-08-23 16:00:00'
+        ]);
+
+        $id = $connection->lastInsertId();
+
+        $result = $repository->getById($id);
+
+        print_r($result);
+
+        $this->assertSame((int)$id, $result['id']);
+
+        $sql = '
+            DELETE FROM tasks WHERE id = :id;
+        ';
+
+        $stmt = $connection->prepare($sql);
+
+        $stmt->execute([
+            'id'=>$result['id']
+        ]);
+    }
 }
 
 

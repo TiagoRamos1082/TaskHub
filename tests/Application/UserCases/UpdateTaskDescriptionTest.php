@@ -21,7 +21,11 @@ class UpdateTaskDescriptionTest extends TestCase
 
         $updateTask = new UpdateTaskDescription($repository);
 
+<<<<<<< HEAD
         $result = $updateTask->execute('description', $task);
+=======
+        $result = $updateTask->execute('tiago', $task);
+>>>>>>> 545162f (feat: add Update Task Description and tests)
 
         $this->assertSame(true, $result);
     }

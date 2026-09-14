@@ -69,6 +69,12 @@ class Task
         $this->setCompletedAt(NULL);
     }
 
+    public function pendingTask(): void
+    {
+        $this->setStatus("PENDING");
+        $this->setCompletedAt(NULL);
+    }
+
 
     public function getId(): int
     {

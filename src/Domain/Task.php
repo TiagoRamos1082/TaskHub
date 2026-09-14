@@ -63,6 +63,12 @@ class Task
         $this->setCompletedAt($completed_at);
     }
 
+    public function inProgressTask(): void
+    {
+        $this->setStatus("IN_PROGRESS");
+        $this->setCompletedAt(NULL);
+    }
+
 
     public function getId(): int
     {

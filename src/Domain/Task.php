@@ -103,7 +103,7 @@ class Task
         return $this->status->value;
     }
 
-    private function setPriority(string $priority): void
+    public function setPriority(string $priority): void
     {
         $this->priority = Priority::from($priority);
     }

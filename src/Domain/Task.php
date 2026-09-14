@@ -93,6 +93,13 @@ class Task
         return  $this->description;
     }
 
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+
+
     public function getStatus(): Status
     {
         return $this->status;

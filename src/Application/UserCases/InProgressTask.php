@@ -2,10 +2,10 @@
 
 namespace App\Application\UserCases;
 
-use App\Domain\Task;
 use App\Application\Repositories\TaskRepository;
+use App\Domain\Task;
 
-class UpdateTaskDescription
+class InProgressTask
 {
     private TaskRepository $repository;
 
@@ -14,10 +14,9 @@ class UpdateTaskDescription
         $this->repository = $repository;
     }
 
-    public function execute(string $description, Task $task): bool
+    public function execute(Task $task): bool
     {
-
-        $task->setDescription($description);
+        $task->inProgressTask();
 
         $this->repository->put($task);
 

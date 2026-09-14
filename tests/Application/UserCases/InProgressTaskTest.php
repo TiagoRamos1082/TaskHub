@@ -2,12 +2,12 @@
 
 namespace Tests\Application\UserCases;
 
-use App\Application\UserCases\UpdateTaskPriority;
+use App\Application\UserCases\InProgressTask;
 use App\Domain\Task;
 use App\Infrastructure\Repositories\TaskRepository;
 use PHPUnit\Framework\TestCase;
 
-class UpdateTaskPriorityTest extends TestCase
+class InProgressTaskTest extends TestCase
 {
     public function testMustUpdateTaskName(): void
     {
@@ -19,9 +19,9 @@ class UpdateTaskPriorityTest extends TestCase
 
         $task = new Task('Arrumar Quarto', "Quarto do Vitor", "2026-08-23 15:43:55");
 
-        $updateTask = new UpdateTaskPriority($repository);
+        $updateTask = new InProgressTask($repository);
 
-        $result = $updateTask->execute(2, $task);
+        $result = $updateTask->execute($task);
 
         $this->assertSame(true, $result);
     }

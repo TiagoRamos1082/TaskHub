@@ -57,6 +57,12 @@ class Task
         return $task;
     }
 
+    public function completeTask(string $completed_at): void
+    {
+        $this->setStatus("COMPLETE");
+        $this->setCompletedAt($completed_at);
+    }
+
 
     public function getId(): int
     {
@@ -143,13 +149,20 @@ class Task
 
     private function setCompletedAt(?string $completed_at): void
     {
-        if($completed_at === null) {
+        if ($completed_at === null) {
             $this->completed_at = null;
-
             return;
         }
 
-        $this->completed_at = new DateTime($completed_at);
+        $date = new DateTime($completed_at);
+
+        if ($this->created_at >= $date) {
+            throw new Exception(
+                'A data de conclusão não pode ser menor à data de criação.'
+            );
+        }
+
+        $this->completed_at = $date;
     }
 
     public function getCompletedAt(): ?DateTime

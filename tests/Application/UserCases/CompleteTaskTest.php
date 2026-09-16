@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class CompleteTaskTest extends TestCase
 {
-    public function testMustUpdateTaskName(): void
+    public function testMustUpdateTaskToCompleteStatus(): void
     {
         $repository = $this->createMock(TaskRepository::class);
 

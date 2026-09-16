@@ -14,7 +14,7 @@ class UpdateTaskDescription
         $this->repository = $repository;
     }
 
-    public function execute(string $description, Task $task): bool
+    public function execute(?string $description, Task $task): bool
     {
 
         $task->setDescription($description);

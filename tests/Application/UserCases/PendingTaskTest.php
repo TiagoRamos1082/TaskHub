@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class PendingTaskTest extends TestCase
 {
-    public function testMustUpdateTaskName(): void
+    public function testMustUpdateTaskToPendingStatus(): void
     {
         $repository = $this->createMock(TaskRepository::class);
 

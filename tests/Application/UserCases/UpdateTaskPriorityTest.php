@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class UpdateTaskPriorityTest extends TestCase
 {
-    public function testMustUpdateTaskName(): void
+    public function testMustUpdateTaskPriority(): void
     {
         $repository = $this->createMock(TaskRepository::class);
 

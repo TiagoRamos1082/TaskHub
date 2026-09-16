@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class InProgressTaskTest extends TestCase
 {
-    public function testMustUpdateTaskName(): void
+    public function testMustUpdateTaskToInProgressStatus(): void
     {
         $repository = $this->createMock(TaskRepository::class);
 

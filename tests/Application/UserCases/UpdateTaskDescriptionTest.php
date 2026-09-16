@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class UpdateTaskDescriptionTest extends TestCase
 {
-    public function testMustUpdateTaskName(): void
+    public function testMustUpdateTaskDescription(): void
     {
         $repository = $this->createMock(TaskRepository::class);
 
@@ -22,6 +22,23 @@ class UpdateTaskDescriptionTest extends TestCase
         $updateTask = new UpdateTaskDescription($repository);
 
         $result = $updateTask->execute('tiago', $task);
+
+        $this->assertSame(true, $result);
+    }
+
+    public function testMustUpdateTaskDescriptionWithNull(): void
+    {
+        $repository = $this->createMock(TaskRepository::class);
+
+        $repository
+            ->expects($this->once())
+            ->method('put');
+
+        $task = new Task('Arrumar Quarto', "Quarto do Vitor", "2026-08-23 15:43:55");
+
+        $updateTask = new UpdateTaskDescription($repository);
+
+        $result = $updateTask->execute(null, $task);
 
         $this->assertSame(true, $result);
     }

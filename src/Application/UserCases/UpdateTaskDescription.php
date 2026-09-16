@@ -2,8 +2,8 @@
 
 namespace App\Application\UserCases;
 
-use App\Application\Repositories\TaskRepository;
 use App\Domain\Task;
+use App\Application\Repositories\TaskRepository;
 
 class UpdateTaskDescription
 {
